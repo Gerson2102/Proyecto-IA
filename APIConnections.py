@@ -6,7 +6,7 @@ from io import BytesIO
 import random
 import openai
 
-openai.api_key = ""
+openai.api_key = "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"
 
 
 # Esta función analiza el texto y se determinan las emociones encontradas en el texto
