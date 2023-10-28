@@ -1,5 +1,20 @@
 import gradio as gr
 from APIConnections import DALLE_API, GoogleNaturalLanguageAPI
+import json
+import tempfile
+import os
+
+
+def get_credentials():
+    creds_json_str = os.getenv("GOOGLE_HUGGIN_FACE")
+
+    with tempfile.NamedTemporaryFile(mode="w+", delete=False, suffix=".json") as temp:
+        temp.write(creds_json_str)
+        temp_filename = temp.name
+    return temp_filename
+
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = get_credentials()
 
 
 def text_to_output(text_input):

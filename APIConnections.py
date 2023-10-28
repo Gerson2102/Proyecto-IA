@@ -5,8 +5,9 @@ from PIL import Image
 from io import BytesIO
 import random
 import openai
+import os
 
-openai.api_key = "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"
+openai.api_key = "YOUR_OPENAI_KEY"
 
 
 # Esta función analiza el texto y se determinan las emociones encontradas en el texto
@@ -70,18 +71,21 @@ def DALLE_API():
         "Una pareja viendo la puesta de sol juntos en la montaña.",
         "Un perro jugando con una pelota en un parque soleado.",
         "Una persona disfrutando de un día soleado en un campo de flores.",
+        "Niños jugando y chapoteando en charcos después de la lluvia.",
+        "Una persona leyendo un libro con una taza de café caliente en una acogedora cafetería.",
+        "Amigos brindando y celebrando un logro importante con sonrisas enormes.",
+        "Una persona disfrutando de un paseo en bicicleta en un hermoso paisaje campestre.",
+        "Un grupo de personas bailando y cantando en un concierto en vivo.",
     ]
     responses = []
     for i in range(0, 3):
         random_index = random.randint(0, len(sentences_for_images) - 1)
 
-        api_key = "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"
-
         url = "https://api.openai.com/v1/images/generations"
 
         custom_headers = {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + api_key,
+            "Authorization": "Bearer " + openai.api_key,
         }
 
         reqBody = {
@@ -99,6 +103,7 @@ def DALLE_API():
     images = []
     for response in responses:
         json_response = json.loads(response.text)
+        print(json_response)
         image_urls = [item["url"] for item in json_response["data"]]
         images += load_images(image_urls)
     return images
