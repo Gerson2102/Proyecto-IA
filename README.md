@@ -7,3 +7,5 @@ Es una página web que tiene el objetivo de ayudar a las personas que lo estén 
 ## Página web
 
 https://huggingface.co/spaces/DearGerson/IA
+
+Nota: La página tarda más de un minuto en responder a tus problemas. Ten paciencia :)
