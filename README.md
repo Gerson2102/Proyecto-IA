@@ -6,4 +6,4 @@ Es una página web que tiene el objetivo de ayudar a las personas que lo estén 
 
 ## Página web
 
-https://huggingface.co/spaces/DearGerson/IA
+[PRESTANDO MIS ALAS](https://huggingface.co/spaces/DearGerson/IA){:target="\_blank"}
