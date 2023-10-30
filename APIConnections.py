@@ -24,7 +24,10 @@ def GoogleNaturalLanguageAPI(user_text_input):
 
     # Emoción claramente positiva
     if float(sentiment.score) >= 0.6 and float(sentiment.magnitude) > 1.0:
-        response = ChatGPT_API(user_text_input)
+        response = ChatGPT_API(
+            user_text_input,
+            "Toma en cuenta que, esta persona tiene emociones positivas: ",
+        )
         return response
     # Emoción claramente neutral
     elif (
@@ -32,20 +35,28 @@ def GoogleNaturalLanguageAPI(user_text_input):
         and float(sentiment.score) > 0.0
         and float(sentiment.magnitude) <= 1.0
     ):
-        response = ChatGPT_API(user_text_input)
+        response = ChatGPT_API(
+            user_text_input,
+            "Toma en cuenta que, esta persona tiene emociones neutrales: ",
+        )
         return response
     # Emoción claramente negativa
     elif float(sentiment.score) < 0.0 and float(sentiment.magnitude) <= 4.0:
-        response = ChatGPT_API(user_text_input)
+        response = ChatGPT_API(
+            user_text_input,
+            "Toma en cuenta que, esta persona tiene emociones negativas: ",
+        )
         return response
     # Emociones mixtas
     else:
-        response = ChatGPT_API(user_text_input)
+        response = ChatGPT_API(
+            user_text_input, "Toma en cuenta que, esta persona tiene emociones mixtas: "
+        )
         return response
 
 
 # Esta funcón realiza la petición a Chat-GPT para que genere un texto motivacional en su respuesta
-def ChatGPT_API(input_text):
+def ChatGPT_API(input_text, emotions):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -55,7 +66,8 @@ def ChatGPT_API(input_text):
             },
             {
                 "role": "user",
-                "content": "Quiero que generes un texto motivacional a partir del siguiente texto: "
+                "content": "Quiero que generes un texto motivacional a partir del siguiente texto. "
+                + emotions
                 + "\n"
                 + input_text,
             },
